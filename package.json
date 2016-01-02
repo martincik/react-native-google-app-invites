@@ -1,0 +1,39 @@
+{
+  "name": "react-native-google-app-invites",
+  "version": "0.1.0",
+  "description": "Google App Invites for your react native applications",
+  "main": "index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-component",
+    "react-native",
+    "google signin",
+    "google app invites",
+    "google invites",
+    "google login",
+    "google+",
+    "oauth",
+    "oauth2",
+    "ios",
+    "android"
+  ],
+  "author": {
+    "name": "Ladislav Martincik",
+    "email": "ladislav.martincik@gmail.com",
+    "url": "https://github.com/martincik"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slowpath/react-native-google-app-invites"
+  },
+  "bugs": {
+    "url": "https://github.com/slowpath/react-native-google-app-invites/issues"
+  },
+  "homepage": "https://github.com/slowpath/react-native-google-app-invites",
+  "peerDependencies": {
+    "react-native": ">= 0.14"
+  },
+  "license": "MIT"
+}
