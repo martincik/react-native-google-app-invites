@@ -24,8 +24,8 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableArray;
 
-public class AppInvitesModule extends ReactContextBaseJavaModule {
-  private static final int REQUEST_INVITE = 0;
+public class RNGoogleAppInvitesModule extends ReactContextBaseJavaModule {
+  private static final int RC_APP_INVITES_IN = 0;
   private static final int RESULT_OK = -1;
 
   private ReactContext _context;
@@ -40,12 +40,6 @@ public class AppInvitesModule extends ReactContextBaseJavaModule {
   @Override
   public String getName() {
     return "RNGoogleAppInvites";
-  }
-
-  public void connectionFailed(ConnectionResult connectionResult) {
-    WritableMap params = Arguments.createMap();
-    params.putString("error", connectionResult.toString());
-    sendEvent(_context, "googleAppInvitesConnectionError", params);
   }
 
   public void invitationsSentSuccessfully(String[] ids) {
@@ -102,14 +96,12 @@ public class AppInvitesModule extends ReactContextBaseJavaModule {
   }
 
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (requestCode == REQUEST_INVITE) {
-      if (resultCode == RESULT_OK) {
-        String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
-        invitationsSentSuccessfully(ids);
-      } else {
-        // Sending failed or it was canceled, show failure message to the user
-        invitationsFailedOrCanceled();
-      }
+    if (resultCode == RESULT_OK) {
+      String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
+      invitationsSentSuccessfully(ids);
+    } else {
+      // Sending failed or it was canceled, show failure message to the user
+      invitationsFailedOrCanceled();
     }
   }
 

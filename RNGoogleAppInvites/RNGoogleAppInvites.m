@@ -9,9 +9,9 @@ RCT_EXPORT_MODULE();
 
 @synthesize bridge = _bridge;
 
-RCT_EXPORT_METHOD(inviteTapped:(NSString *) message
-                     withTitle:(NSString *) title
-                  withDeepLink:(NSString *) deepLink)
+RCT_EXPORT_METHOD(invite:(NSString *) message
+               withTitle:(NSString *) title
+            withDeepLink:(NSString *) deepLink)
 {
   self.inviteDialog = [GINInvite inviteDialog];
   [self.inviteDialog setInviteDelegate: self];
