@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.slowpath.googleappinvites.AppInvitesModule;
+import com.slowpath.googleappinvites.RNGoogleAppInvitesModule;
 
 class RNGoogleAppInvitesPackage implements ReactPackage {
   private Activity _activity;
@@ -26,7 +26,7 @@ class RNGoogleAppInvitesPackage implements ReactPackage {
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
 
-    modules.add(new AppInvitesModule(reactContext, _activity));
+    modules.add(new RNGoogleAppInvitesModule(reactContext, _activity));
 
     return modules;
   }

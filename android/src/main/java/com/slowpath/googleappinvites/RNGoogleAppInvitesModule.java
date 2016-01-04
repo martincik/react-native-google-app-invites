@@ -25,7 +25,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableArray;
 
 public class RNGoogleAppInvitesModule extends ReactContextBaseJavaModule {
-  private static final int RC_APP_INVITES_IN = 0;
+  private static final int RC_APP_INVITES_IN = 9002;
   private static final int RESULT_OK = -1;
 
   private ReactContext _context;
@@ -90,7 +90,7 @@ public class RNGoogleAppInvitesModule extends ReactContextBaseJavaModule {
                   .setMessage(_message)
                   .setDeepLink(Uri.parse(_deepLink))
                   .build();
-          _activity.startActivityForResult(intent, REQUEST_INVITE);
+          _activity.startActivityForResult(intent, RC_APP_INVITES_IN);
         }
     }.init(message, title, deepLink, _activity));
   }
