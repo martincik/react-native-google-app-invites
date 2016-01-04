@@ -1,7 +1,7 @@
 var {
   NativeModules: {
-    GoogleAppInvites
+    RNGoogleAppInvites
   }
 } = require('react-native');
 
-module.exports = GoogleAppInvites;
+module.exports = RNGoogleAppInvites;

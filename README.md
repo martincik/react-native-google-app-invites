@@ -27,54 +27,6 @@ CocoaPods ([Setup](https://guides.cocoapods.org/using/getting-started.html#insta
 - Open https://developers.google.com/app-invites/ios/
 - Follow the instalation steps for CocoaPods
 
-### Usage
-
-From your JS files
-```js
-var { NativeAppEventEmitter } = require('react-native');
-var GoogleAppInvites = require('react-native-google-app-invites');
-
-// configure API keys and access right
-GoogleAppInvites.configure(
-  CLIENT_ID, // from .plist file
-  SCOPES // array of authorization names: eg ['https://www.googleapis.com/auth/plus.login']
-);
-
-// called on signin error
-NativeAppEventEmitter.addListener('googleSignInError', (error) => {
-  ....
-});
-
-// called on signin success, you get user data (email), access token and idToken
-NativeAppEventEmitter.addListener('googleSignIn', (user) => {
-  User: {
-    name
-    email
-    accessToken
-    idToken (IOS ONLY)
-    accessTokenExpirationDate (IOS ONLY)
-  }
-});
-
-
-// called when app is opened with new conversion
-NativeAppEventEmitter.addListener('googleAppInviteConvertion', (body) => {
- console.log('User convertion:', body);
-});
-
-
-// called when user invited his/her contacts
-NativeAppEventEmitter.addListener('googleAppInviteIds', (body) => {
-  console.log('User invited these IDS:', body);
-});
-
-// call this method when user clicks the 'Signin with google' button
-GoogleAppInvites.signIn();
-
-// remove user credentials. next time user starts the application, a signin promp will be displayed
-GoogleAppInvites.signOut();
-```
-
 ## Android
 
 ### Google project configuration
@@ -82,45 +34,43 @@ GoogleAppInvites.signOut();
 - Open https://developers.google.com/app-invites/android/
 - Follow the instalation steps
 
-### Usage
+
+# Usage
+
+From your JS files for both iOS and Android:
+
 ```js
+var { NativeAppEventEmitter, DeviceEventEmitter } = require('react-native');
 var GoogleAppInvites = require('react-native-google-app-invites');
-var { DeviceEventEmitter } = require('react-native');
 
-GoogleAppInvites.init(); // somewhere in a componentDidMount.
+if (Platform.OS === "ios") {
+  GoogleSignin.configure(
+    CLIENT_ID, // from .plist file
+    SCOPES // array of authorization names: eg ['https://www.googleapis.com/auth/plus.login']
+  );
+} else {
+  GoogleAppInvites.init()
+}
 
-// called on signin error
-DeviceEventEmitter.addListener('googleSignInError', (error) => {
-  ....
+let Emitter = (Platform.OS === "android") ? DeviceEventEmitter : NativeAppEventEmitter;
+
+Emitter.addListener('googleSignInError', (error) => {
+  console.log('ERROR signin in', error);
+  this.props.navigator.push({ location: "/" });
 });
 
-// called on signin success, you get user data (email), access token and idToken
-DeviceEventEmitter.addListener('googleSignIn', (user) => {
-  User: {
-    name
-    email
-    accessToken
-    idToken (IOS ONLY)
-    accessTokenExpirationDate (IOS ONLY)
-  }
+Emitter.addListener('googleSignIn', () => {
+  GoogleAppInvites.inviteTapped("Message", "Title", "URL");
 });
 
-
-// called when app is opened with new conversion
-DeviceEventEmitter.addListener('googleAppInviteConvertion', (body) => {
- console.log('User convertion:', body);
+Emitter.addListener('googleAppInviteConvertion', (body) => {
+  console.log('User convertion:', body);
 });
 
-
-// called when user invited his/her contacts
-DeviceEventEmitter.addListener('googleAppInviteIds', (body) => {
+Emitter.addListener('googleAppInviteIds', (body) => {
   console.log('User invited these IDS:', body);
 });
 
-// call this method when user clicks the 'Signin with google' button
-GoogleAppInvites.signIn();
-
-// remove user credentials. next time user starts the application, a signin promp will be displayed
-GoogleAppInvites.signOut();
-
+GoogleAppInvites.invite("Message", "Title", "http://deepLink");
 ```
+
