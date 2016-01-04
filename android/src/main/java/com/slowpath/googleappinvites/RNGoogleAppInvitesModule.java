@@ -95,7 +95,7 @@ public class RNGoogleAppInvitesModule extends ReactContextBaseJavaModule {
     }.init(message, title, deepLink, _activity));
   }
 
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+  public void onActivityResult(int resultCode, Intent data) {
     if (resultCode == RESULT_OK) {
       String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
       invitationsSentSuccessfully(ids);

@@ -14,7 +14,7 @@ import java.util.Collections;
 
 import com.slowpath.googleappinvites.RNGoogleAppInvitesModule;
 
-class RNGoogleAppInvitesPackage implements ReactPackage {
+public class RNGoogleAppInvitesPackage implements ReactPackage {
   private Activity _activity;
 
   public RNGoogleAppInvitesPackage(Activity activity) {
