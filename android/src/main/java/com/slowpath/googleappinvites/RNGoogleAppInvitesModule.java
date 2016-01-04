@@ -31,7 +31,7 @@ public class RNGoogleAppInvitesModule extends ReactContextBaseJavaModule {
   private ReactContext _context;
   private Activity _activity;
 
-  public AppInvitesModule(ReactApplicationContext _reactContext, Activity activity) {
+  public RNGoogleAppInvitesModule(ReactApplicationContext _reactContext, Activity activity) {
     super(_reactContext);
     _context = _reactContext;
     _activity = activity;
