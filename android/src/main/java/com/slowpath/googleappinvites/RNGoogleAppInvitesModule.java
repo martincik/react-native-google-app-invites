@@ -25,11 +25,11 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableArray;
 
 public class RNGoogleAppInvitesModule extends ReactContextBaseJavaModule {
-  private static final int RC_APP_INVITES_IN = 9002;
+  public static final int RC_APP_INVITES_IN = 9002;
   private static final int RESULT_OK = -1;
 
-  private ReactContext _context;
   private Activity _activity;
+  private static ReactApplicationContext _context;
 
   public RNGoogleAppInvitesModule(ReactApplicationContext _reactContext, Activity activity) {
     super(_reactContext);
@@ -42,14 +42,14 @@ public class RNGoogleAppInvitesModule extends ReactContextBaseJavaModule {
     return "RNGoogleAppInvites";
   }
 
-  public void invitationsSentSuccessfully(String[] ids) {
+  public static void invitationsSentSuccessfully(String[] ids) {
     WritableMap params = Arguments.createMap();
     WritableArray paramsIds = Arguments.fromArray(ids);
     params.putArray("ids", paramsIds);
     sendEvent(_context, "googleAppInviteIds", params);
   }
 
-  public void invitationsFailedOrCanceled() {
+  public static void invitationsFailedOrCanceled() {
     WritableMap params = Arguments.createMap();
     params.putString("message", "Sending failed or it was canceled");
     sendEvent(_context, "googleAppInvitesError", params);
@@ -95,7 +95,7 @@ public class RNGoogleAppInvitesModule extends ReactContextBaseJavaModule {
     }.init(message, title, deepLink, _activity));
   }
 
-  public void onActivityResult(int resultCode, Intent data) {
+  public static void onActivityResult(int resultCode, Intent data) {
     if (resultCode == RESULT_OK) {
       String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
       invitationsSentSuccessfully(ids);
@@ -105,7 +105,7 @@ public class RNGoogleAppInvitesModule extends ReactContextBaseJavaModule {
     }
   }
 
-  private void sendEvent(ReactContext reactContext,
+  private static void sendEvent(ReactContext reactContext,
                          String eventName,
                          @Nullable WritableMap params) {
     reactContext
