@@ -31,6 +31,10 @@ CocoaPods ([Setup](https://guides.cocoapods.org/using/getting-started.html#insta
 
 ### Google project configuration
 
+- Install `Google Repository` package in `Android SDK Manager`:
+1) Run in terminal window `android` (will start Android SDK Manager)
+2) Install in `Extras` folder package `Google Repository`
+
 - Open https://developers.google.com/app-invites/android/
 - Follow the instalation steps
 
