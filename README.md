@@ -73,8 +73,8 @@ dependencies {
 * Register Module (in MainActivity.java)
 
 ```java
-import co.apptailor.googleappinvites.RNGoogleAppInvitesModule; // <--- import
-import co.apptailor.googleappinvites.RNGoogleAppInvitesPackage;  // <--- import
+import com.slowpath.googleappinvites.RNGoogleAppInvitesModule; // <--- import
+import com.slowpath.googleappinvites.RNGoogleAppInvitesPackage;  // <--- import
 
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
   ......
